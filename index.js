@@ -1,7 +1,8 @@
 !process.env.NODE_ENV ? (process.env.NODE_ENV = 'development') : null
 
 const expressModule = require('express')
-const testroute = require('./src/routes/test.routes')
+const testroute = require('./src/routes/test.route')
+const mqttroute = require('./src/routes/mqtt.route')
 
 const app = expressModule()
 const appPort = process.env.PORT || 3000
@@ -23,6 +24,7 @@ app.all('*', (req, res, next)=>{
 })
 
 app.use('/api/v1', testroute)
+app.use('/api/v1', mqttroute)
 
 //Catch-all routes
 app.all('*', (req, res, next)=>{
@@ -52,4 +54,3 @@ app.use((err, req, res, next) => {
   })
 
   module.exports = app
-  
