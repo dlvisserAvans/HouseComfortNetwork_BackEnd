@@ -1,13 +1,28 @@
 const mqtt = require('mqtt')
 const client = mqtt.connect({servers: [{host: 'dlv-lab.nl',port: 1883}], username : "dave", password: "T1rMbE&5Sjzlu62&9SSX?XBnYVVb2gxGYJ@0Fdks"})
+const measurementDao = require('../dao/measurement.dao')
 
 client.on('connect', function () {
   client.subscribe('ArduinoTopic', function (err) {
     if (!err) {
-    //   client.publish('TestTopic', 'Hello mqtt')
       console.log("Successfully subscribed!")
     }
   })
+})
+
+client.on('message', function(topic, message, packet){
+  if(topic = 'ArduinoTopic'){
+  let msg = JSON.parse(message.toString().trim())
+  const obj = {SensorId: "TestArduino", Temperature: msg.temperature, Humidity: msg.humidity, Light: 0 }
+  measurementDao.create(obj, (err, result) =>{
+  if(err){
+    console.log(err)
+  }
+  if(result){
+    console.log(result)
+  }
+  })
+}
 })
 
 // Generic function to handle results
