@@ -21,6 +21,7 @@
   "dependencies": {
     "assert": "^2.0.0",
     "express": "^4.17.3",
-    "mqtt": "^4.3.6"
+    "mqtt": "^4.3.6",
+    "mysql": "^2.18.1"
   }
 }
