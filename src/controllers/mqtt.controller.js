@@ -1,4 +1,3 @@
-const assert = require('assert')
 const mqtt = require('mqtt')
 const client = mqtt.connect({servers: [{host: 'dlv-lab.nl',port: 1883}], username : "dave", password: "T1rMbE&5Sjzlu62&9SSX?XBnYVVb2gxGYJ@0Fdks"})
 

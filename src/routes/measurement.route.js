@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const testcontroller = require('../controllers/test.controller')
+const measurementcontroller = require('../controllers/measurement.controller')
 
-router.get('', testcontroller.getById)
+router.post('',measurementcontroller.createMeasurement)
+router.get('', measurementcontroller.getAllMeasurements)
+router.get('/:measurementId',measurementcontroller.getById)
 
 module.exports = router

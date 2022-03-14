@@ -1,9 +1,10 @@
 const assert = require('assert')
+const measurementDao = require('../dao/measurement.dao')
+const queries = require('../dao/queries')
 
 // Generic function to handle results
 const handleResult = (res, next, err, result) => {
   if (err) {
-    logger.trace('getById', err.toString())
     next({
       errCode: 400,
       message: 'Failed calling query',
@@ -21,23 +22,45 @@ const handleResult = (res, next, err, result) => {
 
 let controller = {
 
+  createMeasurement(req, res, next) {
+    console.log('createMeasurement called')
+
+    const measurement = req.body
+    console.log('measurement = ' + measurement)
+
+    measurementDao.create(measurement, (err, result) =>
+      handleResult(res, next, err, result)
+    )
+  },
+
+
   /**
-   * Geef 1 movie op basis van id
    *
    * @param {*} req Incoming request object
    * @param {*} res Response to be returned
    * @param {*} next function to next route handler
    */
-  getById(req, res, next) {
-    const movieId = req.params.movieId
+  getAllMeasurements(req, res, next) {
 
-    console.log('getById Called!')
+    console.log('getAllMeasurements Called!')
 
-    movieDao.getById(movieId, (err, result) =>
+    let sqlQuery = queries.MEASUREMENT_SELECT
+
+    measurementDao.list(sqlQuery, (err, result) =>
       handleResult(res, next, err, result)
     )
-    handleResult(res, next, null, "Hello there!" )
-  }
+  },
+
+getById(req, res, next) {
+  const measurementId = req.params.MeasurementId
+
+  console.log('GetById: ' + measurementId)
+
+  measurementDao.getById(measurementId, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
 }
+
 
 module.exports = controller
