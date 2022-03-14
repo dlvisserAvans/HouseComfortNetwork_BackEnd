@@ -3,9 +3,6 @@ const router = express.Router()
 const mqttcontroller = require('../controllers/mqtt.controller')
 
 // MQTT routes
-router.post(
-  '/mqtt',
-  mqttcontroller.publishMessage
-)
+router.post('/mqtt', mqttcontroller.publishMessage)
 
 module.exports = router
