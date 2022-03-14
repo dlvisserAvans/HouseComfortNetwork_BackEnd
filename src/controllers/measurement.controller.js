@@ -1,7 +1,4 @@
 const assert = require('assert')
-// const logger = require('../config/config').logger
-// const movieDao = require('../dao/movie.dao')
-// const queries = require('../dao/queries')
 
 // Generic function to handle results
 const handleResult = (res, next, err, result) => {
@@ -34,7 +31,6 @@ let controller = {
   getById(req, res, next) {
     const movieId = req.params.movieId
 
-    // logger.info('getById', movieId)
     console.log('getById Called!')
 
     movieDao.getById(movieId, (err, result) =>

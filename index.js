@@ -1,7 +1,7 @@
 !process.env.NODE_ENV ? (process.env.NODE_ENV = 'development') : null
 
 const expressModule = require('express')
-const testroute = require('./src/routes/test.route')
+const measurementroute = require('./src/routes/measurement.route')
 const mqttroute = require('./src/routes/mqtt.route')
 
 const app = expressModule()
@@ -23,7 +23,7 @@ app.all('*', (req, res, next)=>{
     next()
 })
 
-app.use('/api/v1', testroute)
+app.use('/api/v1', measurementroute)
 app.use('/api/v1', mqttroute)
 
 //Catch-all routes
