@@ -13,7 +13,7 @@ client.on('connect', function () {
 client.on('message', function(topic, message, packet){
   if(topic = 'ArduinoTopic'){
   let msg = JSON.parse(message.toString().trim())
-  const obj = {SensorId: "TestArduino", Temperature: msg.temperature, Humidity: msg.humidity, Light: 0 }
+  const obj = {SensorId: msg.sensorid, Temperature: msg.temperature, Humidity: msg.humidity, Light: msg.light, MotorStrength: msg.motorPower}
   measurementDao.create(obj, (err, result) =>{
   if(err){
     console.log(err)
@@ -65,7 +65,7 @@ let controller = {
     let err = "MQTT Failed"
 
     handleResult(res, next, err, result)
-  }
+  },
 }
 
 module.exports = controller

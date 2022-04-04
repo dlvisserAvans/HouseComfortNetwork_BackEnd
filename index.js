@@ -24,7 +24,7 @@ app.all('*', (req, res, next)=>{
 })
 
 app.use('/api/measurements', measurementroute)
-app.use('/api/', mqttroute)
+app.use('/api/mqtt', mqttroute)
 
 //Catch-all routes
 app.all('*', (req, res, next)=>{
