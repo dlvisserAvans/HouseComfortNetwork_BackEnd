@@ -33,30 +33,122 @@ let controller = {
     )
   },
 
+getByTemp(req, res, next) {
+  const TempValue = req.params.TempValue
 
-  /**
-   *
-   * @param {*} req Incoming request object
-   * @param {*} res Response to be returned
-   * @param {*} next function to next route handler
-   */
-  getAllMeasurements(req, res, next) {
+  console.log('GetByTemp: ' + TempValue)
 
-    console.log('getAllMeasurements Called!')
+  measurementDao.getByTemp(TempValue, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
 
-    let sqlQuery = queries.MEASUREMENT_SELECT
+// getMeasurementsByRoom(req, res, next){
+//   const RoomDescription = req.params.RoomDescription
 
-    measurementDao.list(sqlQuery, (err, result) =>
-      handleResult(res, next, err, result)
-    )
-  },
+//   console.log('getMeasurementsByRoom: ' + RoomDescription)
 
-getById(req, res, next) {
-  const measurementId = req.params.MeasurementId
+//   measurementDao.getMeasurementsByRoom(RoomDescription, (err, result) =>
+//     handleResult(res, next, err, result)
+//   )
+// },
 
-  console.log('GetById: ' + measurementId)
+getBySensorId(req, res, next) {
+  const SensorId = req.params.SensorId
 
-  measurementDao.getById(measurementId, (err, result) =>
+  console.log('GetBySensorId: ' + SensorId)
+
+  measurementDao.getBySensorId(SensorId, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getLivingRoomLastDayData(req, res, next) {
+  console.log('getLivingRoomLastDayData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_LIVING_ROOM_LAST_DAY
+
+  measurementDao.getLastDayLivingRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getLivingRoomLastWeekData(req, res, next) {
+  console.log('getAllLastWeekData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_LIVING_ROOM_LAST_WEEK
+
+  measurementDao.getLastWeekLivingRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getAllLivingRoomData(req, res, next) {
+  console.log('getAllLivingRoomData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_LIVING_ROOM_ALL_TIME
+
+  measurementDao.getAllLivingRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getBedRoomLastDayData(req, res, next) {
+  console.log('getAllLastDayData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_BED_ROOM_LAST_DAY
+
+  measurementDao.getLastDayBedRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getBedRoomLastWeekData(req, res, next) {
+  console.log('getAllLastWeekData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_BED_ROOM_LAST_WEEK
+
+  measurementDao.getLastWeekBedRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getAllBedRoomData(req, res, next) {
+  console.log('getAllData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_BED_ROOM_ALL_TIME
+
+  measurementDao.getAllBedRoomData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getAllLastDayData(req, res, next) {
+  console.log('getAllLastDayData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_ALL_LAST_DAY
+
+  measurementDao.getAllLastDayData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getAllLastWeekData(req, res, next) {
+  console.log('getAllLastWeekData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT_ALL_LAST_WEEK
+
+  measurementDao.getAllLastWeekData(sqlQuery, (err, result) =>
+    handleResult(res, next, err, result)
+  )
+},
+
+getAllData(req, res, next) {
+  console.log('getAllData Called!')
+
+  let sqlQuery = queries.MEASUREMENT_SELECT
+
+  measurementDao.getAllData(sqlQuery, (err, result) =>
     handleResult(res, next, err, result)
   )
 },
